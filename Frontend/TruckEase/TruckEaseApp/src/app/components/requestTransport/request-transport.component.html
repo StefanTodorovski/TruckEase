@@ -1,0 +1,96 @@
+<div class="create-transport-request-container">
+  <mat-card class="create-transport-request-card">
+    <mat-card-header>
+      <div class="header-content">
+        <button mat-icon-button matTooltip="Go back to requests" (click)="navigateToRequests()">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <mat-card-title>Create Transport Request</mat-card-title>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-spinner *ngIf="isLoading"></mat-spinner>
+      <form [formGroup]="transportRequestForm" (ngSubmit)="onSubmit()">
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Start Time</mat-label>
+          <input matInput [matDatepicker]="startPicker" formControlName="startTime" placeholder="Choose start time">
+          <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+          <mat-datepicker touchUi #startPicker></mat-datepicker>
+          <mat-error *ngIf="transportRequestForm.controls['startTime'].invalid && transportRequestForm.controls['startTime'].touched">
+            Start time is required.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Arrival Time</mat-label>
+          <input matInput [matDatepicker]="arrivalPicker" formControlName="arrivalTime" placeholder="Choose arrival time">
+          <mat-datepicker-toggle matSuffix [for]="arrivalPicker"></mat-datepicker-toggle>
+          <mat-datepicker touchUi #arrivalPicker></mat-datepicker>
+          <mat-error *ngIf="transportRequestForm.controls['arrivalTime'].invalid && transportRequestForm.controls['arrivalTime'].touched">
+            Arrival time is required.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Price</mat-label>
+          <mat-icon matPrefix>euro_symbol</mat-icon>
+          <input matInput type="number" formControlName="price" placeholder="Enter price">
+          <mat-error *ngIf="transportRequestForm.controls['price'].invalid && transportRequestForm.controls['price'].touched">
+            Price is required and must be a positive number.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Start Location</mat-label>
+          <input matInput formControlName="startLocation" placeholder="Enter start location">
+          <mat-error *ngIf="transportRequestForm.controls['startLocation'].invalid && transportRequestForm.controls['startLocation'].touched">
+            Start location is required.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Destination</mat-label>
+          <input matInput formControlName="destination" placeholder="Enter destination or select from map">
+          <!-- Add map integration here if required -->
+          <mat-error *ngIf="transportRequestForm.controls['destination'].invalid && transportRequestForm.controls['destination'].touched">
+            Destination is required.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description" placeholder="Enter description" rows="4"></textarea>
+          <mat-error *ngIf="transportRequestForm.controls['description'].invalid && transportRequestForm.controls['description'].touched">
+            Description is required and must be under 200 characters.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-checkbox formControlName="isExpress">Is Express?</mat-checkbox>
+        <mat-checkbox formControlName="isDraft">Is Draft?</mat-checkbox>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Transport Type</mat-label>
+          <mat-select formControlName="transportType">
+            <mat-option *ngFor="let transport of transports" [value]="transport">{{ transport }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="transportRequestForm.controls['transportType'].invalid && transportRequestForm.controls['transportType'].touched">
+            Transport type is required.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Load Weight</mat-label>
+          <input matInput type="number" formControlName="loadWeight" placeholder="Enter load weight">
+          <span matSuffix class="unit-text">kg</span>
+          <mat-error *ngIf="transportRequestForm.controls['loadWeight'].invalid && transportRequestForm.controls['loadWeight'].touched">
+            Load weight is required and must be a positive number.
+          </mat-error>
+        </mat-form-field>
+        
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="transportRequestForm.invalid">Create Request</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

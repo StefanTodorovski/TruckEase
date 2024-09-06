@@ -1,0 +1,41 @@
+<div class="global-search-header">
+  <h2>Global Search</h2>
+  <mat-icon matTooltip="Here you can search global companies and connect with them by adding them to your supply chain">info</mat-icon>
+</div>
+
+<div *ngIf="isLoading" class="loading-spinner">
+  Loading companies...
+</div>
+
+<div *ngIf="errorMessage" class="error-message">
+  {{ errorMessage }}
+</div>
+
+<mat-accordion *ngIf="!isLoading && !errorMessage">
+  <mat-expansion-panel *ngFor="let company of companies" class="company-panel">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <div class="header-content">
+          <mat-icon class="company-icon">business</mat-icon>
+          <span>{{ company.companyName }}</span>
+        </div>
+      </mat-panel-title>
+      <mat-panel-description>
+        Registration Number:
+        {{ company.registrationNumber }}
+        <button mat-button class="contact-button"
+          matTooltip="Add this company to your supply chain. By adding the company, you can create requests only for supply chain companies. See more info in help."
+          (click)="AddCompanyToSupplyChain(company.id)">
+          Add to supply chain
+        </button>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class="company-details">
+      <p><strong>Description:</strong> {{ company.description }}</p>
+      <p><strong>Type:</strong>
+        <ng-container *ngIf="company.companyType === 'Transporter'">Transport Company</ng-container>
+        <ng-container *ngIf="company.companyType === 'Shipper'">Shipper Company</ng-container>
+      </p>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

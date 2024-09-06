@@ -1,0 +1,73 @@
+.transports-container {
+    padding: 16px;
+  }
+  
+  .header {
+    margin-bottom: 16px;
+  }
+  
+  .page-title {
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+  
+    mat-icon {
+      margin-left: 8px;
+      cursor: pointer;
+    }
+  }
+  
+  .transports-list {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .transport-item {
+    margin-bottom: 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+  
+    .transport-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+  
+    .transport-section,
+    .company-section,
+    .support-section {
+      flex: 1;
+      text-align: left;
+    }
+  
+    .section-title {
+      font-size: 18px;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+  
+    .transport-details,
+    .support-info {
+      margin-bottom: 16px;
+    }
+  
+    .support-info p {
+      margin: 0 0 8px 0;
+    }
+  
+    .action-buttons {
+        
+      margin-top: 16px;
+      
+      button {
+        margin-top: 8px;
+      }
+    }
+  }
+  
+  .no-transports {
+    text-align: center;
+    color: #757575;
+  }
+  

@@ -1,0 +1,80 @@
+.transports-container {
+  padding: 16px;
+  background-color: #e7edee;
+
+}
+
+.transports-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.transport-item {
+  margin-bottom: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  
+  .transport-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .transport-section,
+  .company-section,
+  .support-section {
+    flex: 1;
+    text-align: left;
+  }
+
+  .section-title {
+    font-size: 18px;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+
+  .transport-details,
+  .support-info {
+    margin-bottom: 16px;
+  }
+
+  .support-info {
+    .support-employee {
+      margin-bottom: 16px;
+    }
+  }
+
+  .transport-details a {
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .company-info {
+    padding: 16px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    margin-right: 25px;
+  }
+
+  .email-link {
+    color: #007bff;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.no-transports {
+  text-align: center;
+  color: #757575;
+}

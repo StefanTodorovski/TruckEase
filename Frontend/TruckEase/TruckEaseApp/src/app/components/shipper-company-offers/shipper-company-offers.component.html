@@ -1,0 +1,77 @@
+<div class="offers-container">
+  <div class="header">
+    <h1 class="page-title">
+      Transport Offers
+      <mat-icon matTooltip="These are offers made by transport companies for your requests">info</mat-icon>
+    </h1>
+    <div class="status-indicators">
+      <div class="status-indicator" matTooltip="Accepted" [ngStyle]="{'background-color': '#90EE90'}"></div>
+      <div class="status-indicator" matTooltip="Declined" [ngStyle]="{'background-color': '#FF6347'}"></div>
+      <div class="status-indicator" matTooltip="Finished" [ngStyle]="{'background-color': '#32CD32'}"></div>
+    </div>
+    <mat-form-field class="status-filter">
+      <mat-select placeholder="Filter by Status" [(value)]="selectedStatus" (selectionChange)="filterOffers()">
+        <mat-option *ngFor="let status of offerStatuses | keyvalue" [value]="status.value">
+          {{ status.value }}
+        </mat-option>
+        <mat-option [value]="''">All</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  
+  <div *ngIf="filteredOffers.length === 0" class="no-offers">
+    <p>No offers found with the selected filter.</p>
+  </div>
+  
+  <div *ngIf="filteredOffers.length > 0" class="offers-list">
+    <mat-card *ngFor="let offer of filteredOffers" class="offer-item" [ngClass]="{
+      'accepted': offer.offerStatus === offerStatuses.Accepted,
+      'declined': offer.offerStatus === offerStatuses.Declined,
+      'finished': offer.offerStatus === offerStatuses.Finished
+    }">
+      <div class="offer-content">
+        <div class="offer-section">
+          <h2 class="section-title">Transport Information</h2>
+          <div class="offer-details">
+            <p><strong>Start Location:</strong> {{ offer.startLocation }}</p>
+            <p><strong>Destination:</strong> {{ offer.destination }}</p>
+            <p><strong>Start Time:</strong> {{ offer.startTime | date: 'short' }}</p>
+            <p><strong>Arrival Time:</strong> {{ offer.arrivalTime | date: 'short' }}</p>
+            <p><strong>Price:</strong> {{ offer.price | currency }}</p>
+            <p><strong>Additional Info:</strong> {{ offer.additionalInfo }}</p>
+            <p><strong>Transport Type:</strong> {{ offer.transportType }}</p>
+            <p><strong>Status:</strong> {{ offer.offerStatus }}</p>
+          </div>
+        </div>
+        <div class="company-section">
+          <h2 class="section-title">Info for Company that Made this Offer</h2>
+          <div class="company-info" *ngIf="getCompanyInfo(offer)">
+            <p><strong>Company Name:</strong> {{ getCompanyInfo(offer)?.companyName }}</p>
+            <p><strong>Registration Number:</strong> {{ getCompanyInfo(offer)?.registrationNumber }}</p>
+            <p><strong>Company Type:</strong> {{ getCompanyInfo(offer)?.companyType }}</p>
+            <p><strong>Description:</strong> {{ getCompanyInfo(offer)?.description }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="action-buttons">
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="offer.offerStatus !== offerStatuses.Undefined"
+          matTooltip="Only undefined offers can be Accepted. Once the offer is accepted, you can see it in active transports."
+          (click)="acceptOffer(offer.offerId)">
+          Accept Offer
+        </button>
+        <button
+          mat-raised-button
+          color="warn"
+          [disabled]="offer.offerStatus !== offerStatuses.Undefined"
+          matTooltip="Only undefined offers can be Declined, once the offer is declined there is no chance to accept this offer."
+          (click)="declineOffer(offer.offerId)">
+          Decline Offer
+        </button>
+        <mat-icon matTooltip="If this offer is Accepted you can see more details in Active Transports tab">info</mat-icon>
+      </div>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="profile-container">
+  <mat-card class="profile-card">
+    <mat-card-header>
+      <mat-card-title class="header-title">Personal Information</mat-card-title>
+      <button 
+        mat-icon-button 
+        (click)="toggleEdit()" 
+        matTooltip="Click here to edit profile details"
+      >
+        <mat-icon>{{ isEditing ? 'save' : 'edit' }}</mat-icon>
+      </button>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="profileForm">
+        <div class="profile-info">
+          <mat-card-subtitle class="name-title">
+            <mat-icon>account_circle</mat-icon>
+            {{ profileForm.get('firstName')?.value }} {{ profileForm.get('lastName')?.value }}
+          </mat-card-subtitle>
+  
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" readonly>
+          </mat-form-field>
+          
+          <mat-form-field appearance="fill">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstName">
+          </mat-form-field>
+          
+          <mat-form-field appearance="fill">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastName">
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Work Phone</mat-label>
+            <input matInput formControlName="workPhone">
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill">
+            <mat-label>Mobile Phone</mat-label>
+            <input matInput formControlName="mobilePhone">
+          </mat-form-field>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

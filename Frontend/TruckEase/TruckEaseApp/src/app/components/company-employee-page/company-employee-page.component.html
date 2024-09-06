@@ -1,0 +1,20 @@
+<div class="company-employee-page-container">
+    <div class="header">
+      <h1>Company Employees</h1>
+      <button mat-raised-button color="primary" (click)="onAddEmployee()">Add Employee</button>
+    </div>
+  
+    <mat-progress-spinner *ngIf="isLoading" mode="indeterminate"></mat-progress-spinner>
+  
+    <div *ngIf="!isLoading" class="employee-list">
+      <mat-card *ngFor="let employee of companyEmployees" class="employee-card">
+        <mat-card-title>{{ employee.firstName }} {{ employee.lastName }}</mat-card-title>
+        <mat-card-subtitle>{{ employee.email }}</mat-card-subtitle>
+        <div class="employee-type">
+          <mat-icon>badge</mat-icon>
+          <span>{{ employee.employeeType }}</span>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+  

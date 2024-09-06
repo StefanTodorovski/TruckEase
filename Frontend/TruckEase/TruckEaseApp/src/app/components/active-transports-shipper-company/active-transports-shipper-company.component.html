@@ -1,0 +1,64 @@
+<div class="transports-container">
+  <div class="header">
+    <h1 class="page-title">
+      Active Transports
+      <mat-icon matTooltip="These are your active transports with details about the transport companies and ways to contact them">info</mat-icon>
+    </h1>
+  </div>
+  <div *ngIf="filteredTransports.length === 0" class="no-transports">
+    <p>No active transports found.</p>
+  </div>
+  
+  <div *ngIf="filteredTransports.length > 0" class="transports-list">
+    <mat-card *ngFor="let transport of filteredTransports" class="transport-item">
+      <div class="transport-content">
+        <div class="transport-section">
+          <h2 class="section-title">Transport Information</h2>
+          <div class="transport-details">
+            <p><strong>Start Location:</strong> {{ transport.startLocation }}</p>
+            <p><strong>Destination:</strong> {{ transport.destination }}</p>
+            <p><strong>Start Time:</strong> {{ transport.startTime | date: 'short' }}</p>
+            <p><strong>Arrival Time:</strong> {{ transport.arrivalTime | date: 'short' }}</p>
+            <p><strong>Price:</strong> {{ transport.price | currency }}</p>
+            <p><strong>Additional Info:</strong> {{ transport.additionalInfo }}</p>
+            <p><strong>Transport Type:</strong> {{ transport.transportType }}</p>
+            <p><strong>Status:</strong> {{ transport.offerStatus }}</p>
+            <p>
+              <strong>Estimated Time for Delivery:</strong> 
+              <span [ngStyle]="{ color: getEstimatedDeliveryColor(transport.arrivalTime) }">
+                <a (click)="showEstimatedDeliveryInfo(transport.arrivalTime)">
+                  {{ calculateEstimatedDelivery(transport.arrivalTime) }} days
+                </a>
+              </span>
+            </p>
+          </div>
+        </div>
+        
+        <div class="company-section" *ngIf="companyInfo">
+          <h2 class="section-title">Info for Company that Made this Offer</h2>
+          <div class="company-info">
+            <p><strong>Company Name:</strong> {{ companyInfo.companyName }}</p>
+            <p><strong>Registration Number:</strong> {{ companyInfo.registrationNumber }}</p>
+            <p><strong>Company Type:</strong> {{ companyInfo.companyType }}</p>
+            <p><strong>Description:</strong> {{ companyInfo.description }}</p>
+          </div>
+        </div>
+        
+        <div class="support-section">
+          <h2 class="section-title">Customer Support</h2>
+          <div class="support-info" *ngIf="supportEmployees.length > 0">
+            <div *ngFor="let employee of supportEmployees" class="support-employee">
+              <p><strong>Name:</strong> {{ employee.firstName }} {{ employee.lastName }}</p>
+              <p><strong>Email:</strong> 
+                <a [href]="'mailto:' + employee.email" class="email-link">{{ employee.email }}</a>
+              </p>
+            </div>
+          </div>
+          <div *ngIf="supportEmployees.length === 0">
+            <p>No support contacts available.</p>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>

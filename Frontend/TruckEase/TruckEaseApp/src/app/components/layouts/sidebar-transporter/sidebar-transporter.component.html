@@ -1,0 +1,52 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav mode="side" opened fixedInViewport="true" class="sidenav">
+    <!-- Logo Image at the Top -->
+    <div class="logo-container">
+      <img src="./../../../assets/img/truckEaseLogo.png" alt="Logo" class="logo">
+    </div>
+
+    <mat-nav-list>
+      <a mat-list-item routerLink="/admin-transporter/active-transports" routerLinkActive="active-link">
+        <mat-icon>dashboard</mat-icon>
+        <span class="menu-text">Active Transports</span>
+      </a>
+      <a mat-list-item routerLink="/admin-transporter/all-requests" routerLinkActive="active-link">
+        <mat-icon>assignment</mat-icon>
+        <span class="menu-text">Requests</span>
+      </a>
+      <a mat-list-item routerLink="/admin-transporter/offers" routerLinkActive="active-link">
+        <mat-icon>local_offer</mat-icon>
+        <span class="menu-text">Offers</span>
+      </a>
+      <a mat-list-item routerLink="/admin-transporter/company-info" routerLinkActive="active-link">
+        <mat-icon>business</mat-icon>
+        <span class="menu-text">Company</span>
+      </a>
+      <a mat-list-item routerLink="/admin-transporter/profile" routerLinkActive="active-link">
+        <mat-icon>person_outline</mat-icon>
+        <span class="menu-text">Profile</span>
+      </a>
+      <a mat-list-item routerLink="/admin-transporter/employees" routerLinkActive="active-link">
+        <mat-icon>group</mat-icon>
+        <span class="menu-text">Employees</span>
+      </a>
+      <a mat-list-item routerLink="/admin-transporter/supply-chain" routerLinkActive="active-link">
+        <mat-icon>network_check</mat-icon>
+        <span class="menu-text">Network Directory</span>
+      </a>
+      <a mat-list-item routerLink="/admin-transporter/global-search" routerLinkActive="active-link">
+        <mat-icon>search</mat-icon>
+        <span class="menu-text">Global Search</span>
+      </a>
+      <a mat-list-item routerLink="/admin-transporter/help" routerLinkActive="active-link">
+        <mat-icon>help_outline</mat-icon>
+        <span class="menu-text">Help</span>
+      </a>
+
+      <a mat-list-item (click)="logout()" class="logout-item">
+        <mat-icon>logout</mat-icon>
+        <span class="menu-text">Logout</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+</mat-sidenav-container>

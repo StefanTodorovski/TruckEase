@@ -1,0 +1,67 @@
+<h1 mat-dialog-title>Edit Request</h1>
+<div mat-dialog-content>
+  <form [formGroup]="editRequestForm">
+    <mat-form-field>
+      <mat-label>Start Location</mat-label>
+      <input matInput formControlName="startLocation">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Destination</mat-label>
+      <input matInput formControlName="destination">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Start Time</mat-label>
+        <input matInput [matDatepicker]="startTimePicker" formControlName="startTime" type="datetime-local">
+        <mat-datepicker-toggle matSuffix [for]="startTimePicker"></mat-datepicker-toggle>
+        <mat-datepicker #startTimePicker></mat-datepicker>
+        <mat-error *ngIf="editRequestForm.get('startTime')?.invalid">
+          Start Time is required
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Arrival Time</mat-label>
+        <input matInput [matDatepicker]="arrivalTimePicker" formControlName="arrivalTime" type="datetime-local">
+        <mat-datepicker-toggle matSuffix [for]="arrivalTimePicker"></mat-datepicker-toggle>
+        <mat-datepicker #arrivalTimePicker></mat-datepicker>
+        <mat-error *ngIf="editRequestForm.get('arrivalTime')?.invalid">
+          Arrival Time is required
+        </mat-error>
+      </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Price</mat-label>
+      <input matInput type="number" formControlName="price">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Load Weight (kg)</mat-label>
+      <input matInput type="number" formControlName="loadWeight">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Transport Type</mat-label>
+        <mat-select formControlName="transportType">
+          <mat-option *ngFor="let transport of transportTypes" [value]="transport">
+            {{ transport }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    <div class="toggle-container">
+      <mat-slide-toggle formControlName="isDraft">Draft</mat-slide-toggle>
+      <mat-slide-toggle formControlName="isExpress">Express</mat-slide-toggle>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button color="primary" (click)="onSubmit()" [disabled]="editRequestForm.invalid">Save</button>
+</div>

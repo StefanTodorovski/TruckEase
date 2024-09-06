@@ -1,0 +1,75 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngIf="photo.id > 0">
+      <div class="container p-3">
+        <mat-card class="example-card" *ngIf="photo">
+          <mat-card-header>
+            <img mat-card-avatar src="{{ photo.thumbnailUrl }}" />
+            <mat-card-title>{{ photo.title }}</mat-card-title>
+          </mat-card-header>
+          <img mat-card-image src="{{ photo.url }}" alt="Photo of a Shiba Inu" />
+          <mat-card-content>
+            <p>This is details about the selected photo</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <div class="p-3">
+        <h2>{{ pageTitle }}</h2>
+        <form novalidate [formGroup]="photoForm" (ngSubmit)="savePhoto()">
+          <div class="form-group mb-3">
+            <label for="imageTitle">Image Title:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="imageTitle"
+              placeholder="Enter image title"
+              name="imageTitle"
+              formControlName="title"
+              [ngClass]="{ 'is-invalid': displayMessage['title'] }"
+            />
+            <span class="invalid-feedback">
+              {{ displayMessage['title'] }}
+            </span>
+          </div>
+          <div class="form-group mb-3">
+            <label for="url">Image URL:</label>
+            <input
+              type="url"
+              class="form-control"
+              id="url"
+              placeholder="Enter image URL"
+              formControlName="url"
+              [ngClass]="{ 'is-invalid': displayMessage['url'] }"
+            />
+            <span class="invalid-feedback">
+              {{ displayMessage['url'] }}
+            </span>
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="thumbnailUrl">Thumbnail URL:</label>
+            <input
+              type="url"
+              class="form-control"
+              id="thumbnailUrl"
+              placeholder="Enter image Thumbnail Url"
+              formControlName="thumbnailUrl"
+              [ngClass]="{ 'is-invalid': displayMessage['thumbnailUrl'] }"
+            />
+            <span class="invalid-feedback">
+              {{ displayMessage['thumbnailUrl'] }}
+            </span>
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-success m-1" [disabled]="!photoForm.valid">Save</button>
+            <button type="button" class="btn btn-danger m-1" (click)="openCancelConfirmationDialog()">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

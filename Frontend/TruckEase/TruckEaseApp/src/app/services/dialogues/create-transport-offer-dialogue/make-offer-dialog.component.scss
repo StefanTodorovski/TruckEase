@@ -1,0 +1,32 @@
+:host {
+    display: block;
+    max-width: 600px;
+    width: 100%;
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 500;
+    color: #3f51b5;
+  }
+  
+  .form-field {
+    margin-bottom: 20px;
+    margin: 5px;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  .dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px 0;
+  
+    button {
+      min-width: 100px;
+    }
+  }
+  

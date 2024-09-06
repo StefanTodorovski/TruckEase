@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Make a Transport Offer</h2>
+
+<form [formGroup]="makeOfferForm" (ngSubmit)="onSubmit()">
+  <div class="form-field">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Price</mat-label>
+      <input matInput formControlName="price" type="number" min="0">
+      <mat-hint align="start">Requested Price: {{ data.requestPrice | currency }}</mat-hint>
+      <mat-icon matSuffix matTooltip="Do you want to offer a different price for this transport request? If no value is entered, the requested price will be included in the offer.">info</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <div class="form-field">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Additional Info</mat-label>
+      <textarea matInput formControlName="additionalInfo" rows="4"></textarea>
+      <mat-icon matSuffix matTooltip="Do you want to include additional info about this offer?">info</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <div mat-dialog-actions class="dialog-actions">
+    <button mat-button type="button" (click)="onCancel()">Cancel</button>
+    <button mat-button color="primary" type="submit">Submit</button>
+  </div>
+</form>

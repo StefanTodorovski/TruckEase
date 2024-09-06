@@ -1,0 +1,51 @@
+<div class="register-company-container">
+    <mat-card class="register-company-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>business</mat-icon> Register Company
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-spinner *ngIf="isLoading"></mat-spinner>
+        <form [formGroup]="registerCompanyForm" (ngSubmit)="onSubmit()">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Company Name</mat-label>
+            <input matInput formControlName="companyName" placeholder="Enter company name" />
+            <mat-error *ngIf="registerCompanyForm.controls['companyName'].invalid && registerCompanyForm.controls['companyName'].touched">
+              Company name is required and must be under 50 characters.
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Registration Number</mat-label>
+            <input matInput formControlName="registrationNumber" placeholder="Enter registration number" />
+            <mat-error *ngIf="registerCompanyForm.controls['registrationNumber'].invalid && registerCompanyForm.controls['registrationNumber'].touched">
+              Registration number is required and must be under 20 characters.
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Company Type</mat-label>
+            <mat-select formControlName="companyType" placeholder="Select company type">
+              <mat-option value="Transporter">Transporter</mat-option>
+              <mat-option value="Shipper">Shipper</mat-option>
+            </mat-select>
+            <mat-error *ngIf="registerCompanyForm.controls['companyType'].invalid && registerCompanyForm.controls['companyType'].touched">
+              Company type is required.
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description" placeholder="Enter a description" rows="4"></textarea>
+            <mat-error *ngIf="registerCompanyForm.controls['description'].invalid && registerCompanyForm.controls['description'].touched">
+              Description is required and must be under 200 characters.
+            </mat-error>
+          </mat-form-field>
+  
+          <button mat-raised-button color="primary" type="submit" [disabled]="registerCompanyForm.invalid">Register Company</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  

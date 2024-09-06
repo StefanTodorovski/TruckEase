@@ -1,0 +1,62 @@
+<div class="request-container">
+  <div class="header">
+    <h1 class="page-title">Requests</h1>
+    <button mat-raised-button color="primary" (click)="navigateToCreateRequest()">
+      Create Request
+    </button>
+  </div>
+    <div class="filter-section">
+    <mat-form-field appearance="fill">
+      <mat-label>Filter</mat-label>
+      <mat-select (selectionChange)="filterRequests($event.value)" placeholder="All">
+        <mat-option value="all">All</mat-option>
+        <mat-option value="draft">Draft</mat-option>
+        <mat-option value="published">Published</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div *ngIf="filteredRequests.length === 0" class="no-requests">
+    <p>There are no current transport requests made by this company.</p>
+    <p>If you want to make one, go to create transport request.</p>
+    <button mat-raised-button color="primary" (click)="navigateToCreateRequest()">Create Request</button>
+  </div>
+
+  <div *ngIf="filteredRequests.length > 0" class="request-list">
+    <mat-card *ngFor="let request of filteredRequests; let i = index" class="request-item">
+      <mat-expansion-panel (opened)="toggleDetails(i)" (closed)="toggleDetails(i)">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ request.startLocation }} → {{ request.destination }}
+          </mat-panel-title>
+          <mat-panel-description>
+            {{ request.startTime | date: 'short' }} → {{ request.arrivalTime | date: 'short' }}
+          </mat-panel-description>
+          <div class="action-buttons">
+            <ng-container *ngIf="request.isDraft; else infoIcon">
+              <button mat-icon-button
+                      matTooltip="Click here to edit or publish this request"
+                      (click)="onEdit(request)">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </ng-container>
+            <ng-template #infoIcon>
+              <mat-icon matTooltip="Published request cannot be edited" class="info-icon">
+                info
+              </mat-icon>
+            </ng-template>
+          </div>
+        </mat-expansion-panel-header>
+
+        <div *ngIf="toggledIndexes.has(i)" class="request-details">
+          <p><strong>Description:</strong> {{ request.description }}</p>
+          <p><strong>Price:</strong> {{ request.price | currency }}</p>
+          <p><strong>Express:</strong> {{ request.isExpress ? 'Yes' : 'No' }}</p>
+          <p><strong>Load Weight:</strong> {{ request.loadWeight }} kg</p>
+          <p><strong>Transport Type:</strong> {{ request.transportType }}</p>
+          <p><strong>Draft:</strong> {{ request.isDraft ? 'Yes' : 'No' }}</p>
+        </div>
+      </mat-expansion-panel>
+    </mat-card>
+  </div>
+</div>

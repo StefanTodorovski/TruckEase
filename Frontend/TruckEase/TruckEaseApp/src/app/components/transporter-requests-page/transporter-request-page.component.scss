@@ -1,0 +1,44 @@
+.request-container {
+    padding: 20px;
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+  
+    .request-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .request-item {
+      .action-buttons {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin-left: auto;
+      }
+  
+      .request-details {
+        padding: 10px 0;
+      }
+    }
+  
+    .no-requests {
+      text-align: center;
+      font-size: 1.2em;
+    }
+  }
+  
+  .request-container {
+    .action-buttons {
+      display: flex;
+      align-items: center;
+      
+      .make-offer-button {
+        margin-right: 20px;
+      }
+    }
+  }

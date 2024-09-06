@@ -1,0 +1,46 @@
+<div class="offers-container">
+    <div class="header">
+        <h1 class="page-title">
+           Transport Offers
+            <mat-icon matTooltip="These are offers made by your company">info</mat-icon>
+          </h1>
+      <mat-form-field class="status-filter">
+        <mat-select placeholder="Filter by Status" [(value)]="selectedStatus" (selectionChange)="filterOffers()">
+          <mat-option *ngFor="let status of offerStatuses | keyvalue" [value]="status.value">
+            {{ status.value }}
+          </mat-option>
+          <mat-option [value]="''">All</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    
+    <div *ngIf="filteredOffers.length === 0" class="no-offers">
+      <p>No offers found with the selected filter.</p>
+    </div>
+    
+    <div *ngIf="filteredOffers.length > 0" class="offers-list">
+      <mat-card *ngFor="let offer of filteredOffers" class="offer-item">
+        <div class="offer-details">
+            <p><strong>Start Location:</strong> {{ offer.startLocation }}</p>
+            <p><strong>Destination:</strong> {{ offer.destination }}</p>
+            <p><strong>Start Time:</strong> {{ offer.startTime | date: 'short' }}</p>
+            <p><strong>Arrival Time:</strong> {{ offer.arrivalTime | date: 'short' }}</p>
+            <p><strong>Price:</strong> {{ offer.price | currency }}</p>
+            <p><strong>Additional Info:</strong> {{ offer.additionalInfo }}</p>
+            <p><strong>Transport Type:</strong> {{ offer.transportType }}</p>
+            <p><strong>Status:</strong> {{ offer.offerStatus }}</p>
+        </div>
+        <div class="action-buttons">
+          <button
+            mat-raised-button
+            color="warn"
+            [disabled]="offer.offerStatus !== offerStatuses.Undefined"
+            matTooltip="Only undefined offers can be deleted, you can't edit an offer"
+            (click)="deleteOffer(offer.offerId)">
+            Delete Offer
+          </button>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+  

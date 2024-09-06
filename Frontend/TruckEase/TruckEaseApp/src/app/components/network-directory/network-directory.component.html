@@ -1,0 +1,47 @@
+<div class="network-directory-header">
+  <h2>Your Supply Chain</h2>
+  <mat-icon matTooltip="This is companies in your supply chain. When making requests or offers, you can create only for these companies.">info</mat-icon>
+</div>
+
+<div *ngIf="isLoading" class="loading-spinner">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="errorMessage" class="error-message">
+  {{ errorMessage }}
+</div>
+
+<mat-accordion *ngIf="!isLoading && !errorMessage && companies.length > 0">
+  <mat-expansion-panel *ngFor="let company of companies" class="company-panel">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <div class="header-content">
+          <mat-icon class="company-icon">business</mat-icon>
+          <span>{{ company.companyName }}</span>
+        </div>
+      </mat-panel-title>
+      <mat-panel-description>
+        Registration Number: {{ company.registrationNumber }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class="company-details">
+      <p><strong>Description:</strong> {{ company.description }}</p>
+      <p><strong>Type:</strong>
+        <ng-container *ngIf="company.companyType === 'Transporter'">Transport Company</ng-container>
+        <ng-container *ngIf="company.companyType === 'Shipper'">Shipper Company</ng-container>
+      </p>
+      <button mat-button class="remove-button"
+        matTooltip="Remove this company from your supply chain."
+        (click)="removeFromSupplyChain(company.id)">
+        Remove from supply chain
+      </button>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<div *ngIf="!isLoading && !errorMessage && companies.length === 0" class="no-companies">
+  <p>There are no contact companies in your supply chain.</p>
+  <button mat-raised-button color="primary" (click)="navigateToAddCompanies()">
+    Add companies to supply chain
+  </button>
+</div>

@@ -1,0 +1,60 @@
+<div class="register-container">
+    <!-- Logo image -->
+    <img class="logo" src="./../../../assets/img/truckEaseLogo.png" alt="Logo">
+  
+    <mat-card class="register-card">
+     <mat-spinner *ngIf="isLoading"></mat-spinner>
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>person_add</mat-icon> Register
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" placeholder="Enter your email" />
+            <mat-error *ngIf="registerForm.controls['email'].invalid && registerForm.controls['email'].touched">
+              Please enter a valid email.
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstName" placeholder="Enter your first name" />
+            <mat-error *ngIf="registerForm.controls['firstName'].invalid && registerForm.controls['firstName'].touched">
+              First name must be under 15 characters.
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastName" placeholder="Enter your last name" />
+            <mat-error *ngIf="registerForm.controls['lastName'].invalid && registerForm.controls['lastName'].touched">
+              Last name must be under 15 characters.
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password" placeholder="Enter your password" />
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Confirm Password</mat-label>
+            <input matInput type="password" formControlName="confirmPassword" placeholder="Confirm your password" />
+            <mat-error *ngIf="registerForm.hasError('mismatch') && registerForm.controls['confirmPassword'].touched">
+              Passwords must match.
+            </mat-error>
+          </mat-form-field>
+  
+          <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">Register</button>
+        </form>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <a routerLink="/login" class="create-account-link">Already have an account? Log in</a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  

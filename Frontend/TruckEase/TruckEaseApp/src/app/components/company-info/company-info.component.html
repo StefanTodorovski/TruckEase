@@ -1,0 +1,35 @@
+<div class="company-info-header">
+    <h2>Company Information</h2>
+    <button mat-icon-button matTooltip="Click here to edit company details" (click)="toggleEdit()">
+      <mat-icon>{{ isEditing ? 'save' : 'edit' }}</mat-icon>
+    </button>
+  </div>
+  
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+  
+  <form *ngIf="!isLoading && !errorMessage" [formGroup]="companyForm" class="company-form">
+    <mat-form-field class="form-field">
+      <mat-label>Company Name</mat-label>
+      <input matInput formControlName="companyName">
+    </mat-form-field>
+  
+    <mat-form-field class="form-field">
+      <mat-label>Registration Number</mat-label>
+      <input matInput formControlName="registrationNumber">
+    </mat-form-field>
+  
+    <mat-form-field class="form-field">
+      <mat-label>Company Type</mat-label>
+      <input matInput formControlName="companyType" [disabled]="true">
+    </mat-form-field>
+  
+    <mat-form-field class="form-field">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+  </form>
+  

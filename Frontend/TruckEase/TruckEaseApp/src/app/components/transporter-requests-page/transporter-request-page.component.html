@@ -1,0 +1,44 @@
+<div class="request-container">
+    <div class="header">
+      <h1 class="page-title">Published Requests</h1>
+      <mat-icon matSuffix matTooltip="Here you can see published requests made by shipper companies , make offers and add companies to supply chain. For more info see help page.">info</mat-icon>
+    </div>
+    
+    <div *ngIf="requests.length === 0" class="no-requests">
+      <p>There are no published transport requests available.</p>
+    </div>
+  
+    <div *ngIf="requests.length > 0" class="request-list">
+      <mat-card *ngFor="let request of requests; let i = index" class="request-item">
+        <mat-expansion-panel (opened)="toggleDetails(i)" (closed)="toggleDetails(i)">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ request.startLocation }} → {{ request.destination }}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{ request.startTime | date: 'short' }} → {{ request.arrivalTime | date: 'short' }}
+            </mat-panel-description>
+            <div class="action-buttons">
+              <button
+                mat-raised-button
+                color="accent"
+                (click)="makeOffer(request.id, request.price)"
+                class="make-offer-button"
+                matTooltip="Make transport offer for this request, you can see your active ones in offers tab">
+                Make Offer
+              </button>
+            </div>
+          </mat-expansion-panel-header>
+  
+          <div *ngIf="toggledIndexes.has(i)" class="request-details">
+            <p><strong>Description:</strong> {{ request.description }}</p>
+            <p><strong>Price:</strong> {{ request.price | currency }}</p>
+            <p><strong>Express:</strong> {{ request.isExpress ? 'Yes' : 'No' }}</p>
+            <p><strong>Load Weight:</strong> {{ request.loadWeight }} kg</p>
+            <p><strong>Transport Type:</strong> {{ request.transportType }}</p>
+          </div>
+        </mat-expansion-panel>
+      </mat-card>
+    </div>
+  </div>
+  
